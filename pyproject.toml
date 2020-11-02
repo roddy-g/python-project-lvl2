@@ -4,6 +4,11 @@ version = "0.1.0"
 description = ""
 authors = ["Roddy <per677199@yandex.ru>"]
 
+packages = [
+{ include = 'gendiff'},
+]
+
+
 [tool.poetry.dependencies]
 python = "^3.8"
 
@@ -14,4 +19,5 @@ requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
-gendiff = "hexlet_code.scripts.gendiff:main"
+gendiff = "gendiff.scripts.gendiff:main"
+
