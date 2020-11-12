@@ -38,9 +38,9 @@ def test(file_1='gendiff/tests/fixtures/simple_json_file_1.json',
          diff='gendiff/tests/fixtures/diff_file_1_file_2.txt'):
     first_file = json.load(open(file_1))
     second_file = json.load(open(file_2))
-    different_true = open(diff).read()
+    different_true_1 = open(diff).read()
     diffrenet_by_func = find_diffs(first_file, second_file)
-    assert diffrenet_by_func == different_true
+    assert diffrenet_by_func == different_true_1
 
 
 if __name__ == '__main__':
