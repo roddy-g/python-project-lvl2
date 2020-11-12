@@ -25,3 +25,4 @@ jobs:
       - name: linter
         run: |
           make lint
+          make test
