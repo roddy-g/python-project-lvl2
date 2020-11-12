@@ -1,2 +1,1 @@
-### Hexlet tests and linter status:
-![Actions Status](/workflows/hexlet-check/badge.svg)
+<a href="https://github.com/roddy-g/python-project-lvl2/workflows/lint/badge.svg"><img src="https://github.com/roddy-g/python-project-lvl2/workflows/lint/badge.svg" /></a>
