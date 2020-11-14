@@ -10,11 +10,11 @@ def main():
     args = parser.parse_args()
     first_file = json.load(open(args.first_file))
     second_file = json.load(open(args.second_file))
-    result = find_diffs(first_file, second_file)
+    result = generate_diff(first_file, second_file)
     print(result)
 
 
-def find_diffs(first_file, second_file):
+def generate_diff(first_file, second_file):
     diff = []
     unique_keys = set(list(first_file.keys()) + list(second_file.keys()))
     for key in sorted(unique_keys):
