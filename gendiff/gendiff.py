@@ -14,9 +14,11 @@ def main():
     print(result)
 
 
-def generate_diff(first_file, second_file):
+def generate_diff(first_file_data, second_file_data):
     diff = []
-    unique_keys = set(list(first_file.keys()) + list(second_file.keys()))
+    first_file_keys_list = list(first_file_data.keys())
+    second_file_keys_list = list(second_file_data.keys())
+    unique_keys = set(first_file_keys_list + second_file_keys_list)
     for key in sorted(unique_keys):
         first_file_value = first_file.get(key)
         second_file_value = second_file.get(key)
