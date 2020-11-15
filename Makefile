@@ -7,6 +7,6 @@ run:
 test:
 	poetry run tests	
 package-install:
-	pip install --user /home/rodion/Desktop/python-project-lvl2/dist/hexlet_code-0.2.0-py3-none-any.whl
+	pip install --user /home/rodion/Desktop/python-project-lvl2/dist/hexlet_code-0.3.0-py3-none-any.whl
 build:
 	poetry build

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hexlet_code"
-version = "0.2.0"
+version = "0.3.0"
 description = ""
 authors = ["Roddy <per677199@yandex.ru>"]
 
@@ -19,7 +19,7 @@ coverage = "^5.3"
 flake8 = "^3.8.4"
 
 [tool.poetry.scripts]
-gendiff = "gendiff.generate_diff:main"
+gendiff = "gendiff.gendiff:main"
 tests = "tests.test_generate_diff:test"
 
 [build-system]

@@ -1,16 +1,16 @@
 import argparse
-import json
+from gendiff.data_loader import load_data
 
 
 def main():
     parser = argparse.ArgumentParser(description='Generate diff.')
-    parser.add_argument('first_file')
-    parser.add_argument('second_file')
+    parser.add_argument('path_to_first_file')
+    parser.add_argument('path_to_second_file')
     parser.add_argument('-f', '--format', help='set format of output')
     args = parser.parse_args()
-    first_file = json.load(open(args.first_file))
-    second_file = json.load(open(args.second_file))
-    result = generate_diff(first_file, second_file)
+    first_file_data = load_data(args.path_to_first_file)
+    second_file_data = load_data(args.path_to_second_file)
+    result = generate_diff(first_file_data, second_file_data)
     print(result)
 
 
