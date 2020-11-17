@@ -10,34 +10,54 @@ def main():
     args = parser.parse_args()
     first_file_data = load_data(args.path_to_first_file)
     second_file_data = load_data(args.path_to_second_file)
-    result = generate_diff(first_file_data, second_file_data)
-    print(result)
+    diff = generate_diff(first_file_data, second_file_data)
+    return diff
 
 
 def generate_diff(first_file_data, second_file_data):
-    diff = []
-    first_file_keys = set(first_file_data.keys())
-    second_file_keys = set(second_file_data.keys())
+    diff = {}
+    first_file_keys = set()
+    second_file_keys = set()
+    if type(first_file_data) is dict:
+        first_file_keys = set(first_file_data.keys())
+    if type(second_file_data) is dict:
+        second_file_keys = set(second_file_data.keys())
     common_keys = first_file_keys.intersection(second_file_keys)
-    changed_keys = set([key for key in common_keys if first_file_data[key]
-                        != second_file_data[key]])
+    changed_keys = set(key for key in common_keys if first_file_data[key]
+                       != second_file_data[key])
     unchanged_keys = common_keys - changed_keys
     deleted_keys = first_file_keys.difference((second_file_keys))
     added_keys = second_file_keys.difference(first_file_keys)
-    unique_keys = first_file_keys.union(second_file_keys)
-    for key in sorted(unique_keys):
-        first_file_value = first_file_data.get(key)
-        second_file_value = second_file_data.get(key)
-        if key in unchanged_keys:
-            diff.append('   {}:{}'.format(key, first_file_value))
-        elif key in changed_keys:
-            diff.append(' - {}:{}'.format(key, first_file_value))
-            diff.append(' + {}:{}'.format(key, second_file_value))
-        elif key in deleted_keys:
-            diff.append(' - {}:{}'.format(key, first_file_value))
-        elif key in added_keys:
-            diff.append(' + {}:{}'.format(key, second_file_value))
-    return '{{\n{}\n}}'.format('\n'.join(diff))
+    for key in unchanged_keys:
+        diff[key] = {'status': 'unchanged', 'value': first_file_data.get(key)}
+    for key in changed_keys:
+        diff[key] = {'status': 'changed',
+                     'value_before': first_file_data.get(key),
+                     'value_after': second_file_data.get(key)}
+    for key in deleted_keys:
+        diff[key] = {'status': 'deleted', 'value': first_file_data.get(key)}
+    for key in added_keys:
+        diff[key] = {'status': 'added', 'value': second_file_data.get(key)}
+    print(stylish(diff))
+    return diff
+
+
+def stylish(diff):
+    result = []
+    for key in sorted(diff.keys()):
+        if diff[key]['status'] == 'unchanged':
+            result.append('   {}:{}'.format(key, diff[key]['value']))
+        elif diff[key]['status'] == 'changed':
+            result.append(' - {}:{}'.format(key, diff[key]['value_before']))
+            result.append(' + {}:{}'.format(key, diff[key]['value_after']))
+        elif diff[key]['status'] == 'deleted':
+            result.append(' - {}:{}'.format(key, diff[key]['value']))
+        elif diff[key]['status'] == 'added':
+            result.append(' + {}:{}'.format(key, diff[key]['value']))
+    result.insert(0, '{')
+    result.append('}')
+    formatted_diff = '\n'.join(result)
+    return formatted_diff
 
 
 if __name__ == '__main__':
