@@ -19,11 +19,12 @@ def generate_diff(first_file_data, second_file_data):
     first_file_keys = set(first_file_data.keys())
     second_file_keys = set(second_file_data.keys())
     common_keys = first_file_keys.intersection(second_file_keys)
-    changed_keys = set([key for key in common_keys if first_file_data[key] != second_file_data[key]])
+    changed_keys = set([key for key in common_keys if first_file_data[key]
+                        != second_file_data[key]])
     unchanged_keys = common_keys - changed_keys
     deleted_keys = first_file_keys.difference((second_file_keys))
     added_keys = second_file_keys.difference(first_file_keys)
-
+    print(unchanged_keys, deleted_keys, added_keys)
     unique_keys = first_file_keys.union(second_file_keys)
     for key in sorted(unique_keys):
         first_file_value = first_file_data.get(key)

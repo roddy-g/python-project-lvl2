@@ -2,6 +2,7 @@ install:
 	poetry install
 lint:
 	poetry run mypy gendiff
+	poetry run flake8 gendiff
 run:
 	poetry run gendiff gendiff/tests/fixtures/simple_json_file_1.json gendiff/tests/fixtures/simple_json_file_2.json 
 test:
@@ -11,4 +12,5 @@ package-install:
 build:
 	poetry build
 coverage:
-	poetry run coverage report
+	poetry run pytest --cov=gendiff
+
