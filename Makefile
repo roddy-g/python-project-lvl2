@@ -12,7 +12,6 @@ package-install:
 build:
 	poetry build
 coverage:
-	poetry run pytest --cov=gendiff
-	poetry run coverage report
+	poetry run pytest --cov=gendiff --cov-report xml
 
 
