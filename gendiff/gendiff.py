@@ -24,21 +24,19 @@ def generate_diff(first_file_data, second_file_data):
     unchanged_keys = common_keys - changed_keys
     deleted_keys = first_file_keys.difference((second_file_keys))
     added_keys = second_file_keys.difference(first_file_keys)
-    print(unchanged_keys, deleted_keys, added_keys)
     unique_keys = first_file_keys.union(second_file_keys)
     for key in sorted(unique_keys):
         first_file_value = first_file_data.get(key)
         second_file_value = second_file_data.get(key)
-        if first_file_value is not None and second_file_value is not None:
-            if first_file_value == second_file_value:
-                diff.append('   {}:{}'.format(key, first_file_value))
-            else:
-                diff.append(' - {}:{}'.format(key, first_file_value))
-                diff.append(' + {}:{}'.format(key, second_file_value))
-        elif second_file_value is not None:
-            diff.append(' + {}:{}'.format(key, second_file_value))
-        elif first_file_value is not None:
+        if key in unchanged_keys:
+            diff.append('   {}:{}'.format(key, first_file_value))
+        elif key in changed_keys:
             diff.append(' - {}:{}'.format(key, first_file_value))
+            diff.append(' + {}:{}'.format(key, second_file_value))
+        elif key in deleted_keys:
+            diff.append(' - {}:{}'.format(key, first_file_value))
+        elif key in added_keys:
+            diff.append(' + {}:{}'.format(key, second_file_value))
     return '{{\n{}\n}}'.format('\n'.join(diff))
 
 
