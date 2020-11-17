@@ -39,7 +39,7 @@ def generate_diff(first_file_data, second_file_data):
     for key in added_keys:
         diff[key] = {'status': 'added', 'value': second_file_data.get(key)}
     print(stylish(diff))
-    return diff
+    return stylish(diff)
 
 
 def stylish(diff):
