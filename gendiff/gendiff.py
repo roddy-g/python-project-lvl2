@@ -20,39 +20,39 @@ def main():
     return result
 
 
-def generate_diff(source, second_source):
+def generate_diff(source, changed_source):
     diff = {}
     for key in source:
-        if key not in second_source:
+        if key not in changed_source:
             diff[key] = {
                 'status': 'deleted',
                 'value': source[key]
             }
             continue
-        if type(source[key]) == dict and type(second_source[key]) == dict:
-            child_diff = generate_diff(source[key], second_source[key])
+        if type(source[key]) == dict and type(changed_source[key]) == dict:
+            child_diff = generate_diff(source[key], changed_source[key])
             diff[key] = {
                 'status': 'common',
                 'value': child_diff
             }
             continue
-        if source[key] == second_source[key]:
+        if source[key] == changed_source[key]:
             diff[key] = {
                 'status': 'common',
                 'value': source[key]
             }
             continue
-        if source[key] != second_source[key]:
+        if source[key] != changed_source[key]:
             diff[key] = {
                 'status': 'changed',
-                'value': [source[key], second_source[key]]
+                'value': [source[key], changed_source[key]]
             }
             continue
-    for key in second_source:
+    for key in changed_source:
         if key not in source:
             diff[key] = {
                 'status': 'added',
-                'value': second_source[key]
+                'value': changed_source[key]
             }
     return diff
 
