@@ -28,26 +28,22 @@ def generate_diff(source, changed_source):
                 'status': 'deleted',
                 'value': source[key]
             }
-            continue
-        if type(source[key]) == dict and type(changed_source[key]) == dict:
+        elif type(source[key]) == dict and type(changed_source[key]) == dict:
             child_diff = generate_diff(source[key], changed_source[key])
             diff[key] = {
                 'status': 'common',
                 'value': child_diff
             }
-            continue
-        if source[key] == changed_source[key]:
+        elif source[key] == changed_source[key]:
             diff[key] = {
                 'status': 'common',
                 'value': source[key]
             }
-            continue
-        if source[key] != changed_source[key]:
+        elif source[key] != changed_source[key]:
             diff[key] = {
                 'status': 'changed',
                 'value': [source[key], changed_source[key]]
             }
-            continue
     for key in changed_source:
         if key not in source:
             diff[key] = {
