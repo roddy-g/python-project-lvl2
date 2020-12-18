@@ -10,7 +10,9 @@ def main():
     parser.add_argument('path_to_first_file')
     parser.add_argument('path_to_second_file')
     parser.add_argument('-f', '--format',
-                        help='set format of output', default=stylish_tree)
+                        help='set format of output, valid formats are json,'
+                             ' plain, tree. Default format is tree.',
+                        default=stylish_tree)
     args = parser.parse_args()
     formatter = stylish_tree
     if args.format == 'plain':
@@ -20,7 +22,7 @@ def main():
     first_file_data = load_data(args.path_to_first_file)
     second_file_data = load_data(args.path_to_second_file)
     diff = generate_diff(first_file_data, second_file_data, formatter)
-    if formatter == stylish_json:
+    if formatter != stylish_json:
         print(diff)
     return diff
 
