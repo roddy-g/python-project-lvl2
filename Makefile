@@ -13,5 +13,10 @@ build:
 	poetry build
 coverage:
 	poetry run pytest --cov=gendiff --cov-report xml
+CI:
+	poetry run pytest
+	poetry run mypy gendiff
+	poetry run flake8 gendiff
+
 
 

@@ -15,7 +15,7 @@ def main():
     first_file_data = load_data(args.path_to_first_file)
     second_file_data = load_data(args.path_to_second_file)
     diff = generate_diff(first_file_data, second_file_data)
-    result = stylish(diff)
+    result = stylish_tree(diff)
     print(result)
     return result
 
@@ -53,14 +53,14 @@ def generate_diff(source, changed_source):
     return diff
 
 
-def stylish(raw_diff, level=0):
+def stylish_tree(raw_diff, level=0):
     indent = BASE_INDENT * level
     styled_diff = []
     for key in sorted(raw_diff.keys()):
         data = raw_diff[key]
         try:
             if type(data['value']) == dict:
-                formatted_value = stylish(data['value'], level=level+1)
+                formatted_value = stylish_tree(data['value'], level=level + 1)
                 styled_diff.append('{}{}{}: {}'.format(
                     indent, BASE_INDENT, key, formatted_value))
                 continue
