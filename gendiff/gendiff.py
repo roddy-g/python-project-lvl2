@@ -1,7 +1,8 @@
 import argparse
 from gendiff.data_loader import load_data
-from gendiff.stylish import stylish_tree
+from gendiff.stylish_tree import stylish_tree
 from gendiff.stylish_plain import stylish_plain
+from gendiff.stylish_json import stylish_json
 
 
 def main():
@@ -14,10 +15,13 @@ def main():
     formatter = stylish_tree
     if args.format == 'plain':
         formatter = stylish_plain
+    if args.format == 'json':
+        formatter = stylish_json
     first_file_data = load_data(args.path_to_first_file)
     second_file_data = load_data(args.path_to_second_file)
     diff = generate_diff(first_file_data, second_file_data, formatter)
-    print(diff)
+    if formatter == stylish_json:
+        print(diff)
     return diff
 
 
