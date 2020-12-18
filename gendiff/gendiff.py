@@ -34,15 +34,15 @@ def generate_diff(source, changed_source):
                 'status': 'common',
                 'value': child_diff
             }
-        elif source[key] == changed_source[key]:
-            diff[key] = {
-                'status': 'common',
-                'value': source[key]
-            }
         elif source[key] != changed_source[key]:
             diff[key] = {
                 'status': 'changed',
                 'value': [source[key], changed_source[key]]
+            }
+        else:
+            diff[key] = {
+                'status': 'common',
+                'value': source[key]
             }
     for key in changed_source:
         if key not in source:
