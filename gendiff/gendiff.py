@@ -1,6 +1,7 @@
 import argparse
 from gendiff.data_loader import load_data
 from gendiff.stylish import stylish_tree
+from gendiff.stylish_plain import stylish_plain
 
 
 def main():
@@ -10,8 +11,9 @@ def main():
     parser.add_argument('-f', '--format',
                         help='set format of output', default=stylish_tree)
     args = parser.parse_args()
-    if args.format == 'stylish_tree':
-        formatter = stylish_tree
+    formatter = stylish_tree
+    if args.format == 'plain':
+        formatter = stylish_plain
     first_file_data = load_data(args.path_to_first_file)
     second_file_data = load_data(args.path_to_second_file)
     diff = generate_diff(first_file_data, second_file_data, formatter)
@@ -19,7 +21,13 @@ def main():
     return diff
 
 
-def generate_diff(source, changed_source, formatter, level=0):
+def generate_diff(source, changed_source, formatter):
+    raw_diff = make_raw_diff(source, changed_source)
+    styled_dif = formatter(raw_diff)
+    return styled_dif
+
+
+def make_raw_diff(source, changed_source):
     diff = {}
     for key in source:
         if key not in changed_source:
@@ -28,8 +36,7 @@ def generate_diff(source, changed_source, formatter, level=0):
                 'value': source[key]
             }
         elif type(source[key]) == dict and type(changed_source[key]) == dict:
-            child_diff = generate_diff(source[key], changed_source[key],
-                                       formatter, level=level+1)
+            child_diff = make_raw_diff(source[key], changed_source[key])
             diff[key] = {
                 'status': 'common',
                 'value': child_diff
@@ -50,7 +57,7 @@ def generate_diff(source, changed_source, formatter, level=0):
                 'status': 'added',
                 'value': changed_source[key]
             }
-    return formatter(diff, level=level)
+    return diff
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 from gendiff.gendiff import generate_diff
 from gendiff.data_loader import load_data
 from gendiff.stylish import stylish_tree
+from gendiff.stylish_plain import stylish_plain
 
 
 def test_simple_files():
@@ -33,3 +34,12 @@ def test_complicated_json_files():
     diff = generate_diff(first_file_data, second_file_data, stylish_tree)
     with open('tests/fixtures/correct_diff_for_complicated_files.txt', 'r') as correct_diff:
         assert diff == correct_diff.read()
+
+
+def test_complicated_files_plain_style():
+    first_file_data = load_data('tests/fixtures/complicated_json_file_1.json')
+    second_file_data = load_data('tests/fixtures/complicated_json_file_2.json')
+    diff = generate_diff(first_file_data, second_file_data, stylish_plain)
+    with open('tests/fixtures/correct_plain_diff_for_complicated_files.txt', 'r') as correct_diff:
+        assert diff == correct_diff.read()
+
