@@ -19,9 +19,9 @@ def stylish_tree(raw_diff, level=0):
             pass
         if data['status'] == 'changed':
             formatted_value_before = format_child_value(
-                data['value'][0], level=level + 1)
+                data['value']['before'], level=level + 1)
             formatted_value_after = format_child_value(
-                data['value'][1], level=level + 1)
+                data['value']['after'], level=level + 1)
             styled_diff.append(TEMPLATE_DELETED.format(
                 indent, key, formatted_value_before))
             styled_diff.append(TEMPLATE_ADDED.format(

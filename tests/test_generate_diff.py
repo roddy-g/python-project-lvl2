@@ -1,6 +1,6 @@
 from gendiff.gendiff import generate_diff
 from gendiff.data_loader import load_data
-from gendiff.stylish_tree import stylish_tree
+from gendiff.stylish_detailed import stylish_tree
 from gendiff.stylish_plain import stylish_plain
 
 

@@ -21,8 +21,8 @@ def stylish_plain(raw_diff, parent=''):
         elif status == 'deleted':
             styled_diff.append(TEMPLATE_REMOVED.format(formatted_parent, key))
         elif status == 'changed':
-            formatted_value_before = format_value(data['value'][0])
-            formatted_value_after = format_value(data['value'][1])
+            formatted_value_before = format_value(data['value']['before'])
+            formatted_value_after = format_value(data['value']['after'])
             styled_diff.append(TEMPLATE_UPDATED.format(formatted_parent,
                                                        formatted_value_before,
                                                        formatted_value_after))

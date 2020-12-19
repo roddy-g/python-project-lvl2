@@ -1,6 +1,6 @@
 import argparse
 from gendiff.data_loader import load_data
-from gendiff.stylish_tree import stylish_tree
+from gendiff.stylish_detailed import stylish_tree
 from gendiff.stylish_plain import stylish_plain
 from gendiff.stylish_json import stylish_json
 
@@ -27,6 +27,8 @@ def main():
 
 
 def generate_diff(source, changed_source, formatter):
+    if type(source) != dict and type(changed_source) != dict:
+        return 'Incorrect input data'
     raw_diff = make_raw_diff(source, changed_source)
     styled_dif = formatter(raw_diff)
     return styled_dif
@@ -38,7 +40,8 @@ def make_raw_diff(source, changed_source):
         if key not in changed_source:
             diff[key] = {
                 'status': 'deleted',
-                'value': source[key]
+                'value': source[key],
+                'children': None
             }
         elif type(source[key]) == dict and type(changed_source[key]) == dict:
             child_diff = make_raw_diff(source[key], changed_source[key])
@@ -49,7 +52,10 @@ def make_raw_diff(source, changed_source):
         elif source[key] != changed_source[key]:
             diff[key] = {
                 'status': 'changed',
-                'value': [source[key], changed_source[key]]
+                'value': {
+                    'before': source[key],
+                    'after': changed_source[key]
+                }
             }
         else:
             diff[key] = {
