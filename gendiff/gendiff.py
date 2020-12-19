@@ -22,8 +22,7 @@ def main():
     first_file_data = load_data(args.path_to_first_file)
     second_file_data = load_data(args.path_to_second_file)
     diff = generate_diff(first_file_data, second_file_data, formatter)
-    if formatter != stylish_json:
-        print(diff)
+    print(diff)
     return diff
 
 
