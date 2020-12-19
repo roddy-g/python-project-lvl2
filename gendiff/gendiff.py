@@ -41,7 +41,6 @@ def make_raw_diff(source, changed_source):
             diff[key] = {
                 'status': 'deleted',
                 'value': source[key],
-                'children': None
             }
         elif type(source[key]) == dict and type(changed_source[key]) == dict:
             child_diff = make_raw_diff(source[key], changed_source[key])
