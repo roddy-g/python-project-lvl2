@@ -7,7 +7,7 @@
 <a href="https://asciinema.org/a/2sWAY0TH9Yjxce2v5FkntftM6" target="_blank"><img src="https://asciinema.org/a/2sWAY0TH9Yjxce2v5FkntftM6.svg" /></a>
 # Сравнение файлов имеющих рекурсивную структуру.
 <a href="https://asciinema.org/a/1PhLAURczw5gU4Sf8wPKiAqdn" target="_blank"><img src="https://asciinema.org/a/1PhLAURczw5gU4Sf8wPKiAqdn.svg" /></a>
-# Сравнение файлов имеющих рекурсивную структуру, вывод в плоском формате.
+# Сравнение файлов имеющих рекурсивную структуру, вывод в "плоском" формате.
 <a href="https://asciinema.org/a/cuxuKkLa6QqYZ86c0h2SaPJcD" target="_blank"><img src="https://asciinema.org/a/cuxuKkLa6QqYZ86c0h2SaPJcD.svg" /></a>
 # Сравнение файлов имеющих рекурсивную структуру, вывод в формате json.
 <a href="https://asciinema.org/a/e7zlt34P58o8MVLFKpBM5OClf" target="_blank"><img src="https://asciinema.org/a/e7zlt34P58o8MVLFKpBM5OClf.svg" /></a>
