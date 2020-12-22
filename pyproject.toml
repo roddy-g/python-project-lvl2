@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hexlet_code"
-version = "0.4.0"
+version = "0.5.0"
 description = ""
 authors = ["Roddy <per677199@yandex.ru>"]
 
@@ -23,7 +23,6 @@ pip = "^20.3.3"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.gendiff:main"
-tests = "tests.test_generate_diff:test"
 
 [build-system]
 requires = ["poetry>=0.12"]
