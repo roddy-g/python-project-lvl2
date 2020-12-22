@@ -37,7 +37,7 @@ def stylish_tree(raw_diff, level=0):
         elif data['status'] == 'common':
             styled_diff.append(TEMPLATE_COMMON.format(
                 indent, key, formatted_value))
-    styled_diff = wrap(styled_diff, indent)
+    styled_diff = make_wrapped_string(styled_diff, indent)
     styled_diff = styled_diff.replace('True', 'true')
     styled_diff = styled_diff.replace('False', 'false')
     styled_diff = styled_diff.replace('None', 'null')
@@ -57,11 +57,11 @@ def format_child_value(data, level):
             value = format_child_value(data[key], level=level + 1)
             result.append(TEMPLATE_COMMON.format(
                 indent, key, value))
-    result = wrap(result, indent)
+    result = make_wrapped_string(result, indent)
     return result
 
 
-def wrap(data, indent):
+def make_wrapped_string(data, indent):
     data.insert(0, '{')
     data.append('{}}}'.format(indent))
     data = '\n'.join(data)
