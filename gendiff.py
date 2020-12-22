@@ -12,7 +12,7 @@ def main():
     parser.add_argument('-f', '--format',
                         help='set format of output, valid formats are json,'
                              ' plain, tree. Default format is tree.',
-                        default=stylish)
+                        default='stylish')
     args = parser.parse_args()
     formatter = args.format
     diff = generate_diff(args.path_to_first_file,
