@@ -4,14 +4,14 @@ TEMPLATE_ADDED = '{}  + {}: {}'
 TEMPLATE_COMMON = '{}    {}: {}'
 
 
-def stylish_tree(raw_diff, level=0):
+def stylish(raw_diff, level=0):
     indent = BASE_INDENT * level
     styled_diff = []
     for key in sorted(raw_diff.keys()):
         data = raw_diff[key]
         try:
             if type(data['value']) == dict:
-                formatted_value = stylish_tree(data['value'], level=level + 1)
+                formatted_value = stylish(data['value'], level=level + 1)
                 styled_diff.append(TEMPLATE_COMMON.format(
                     indent, key, formatted_value))
                 continue

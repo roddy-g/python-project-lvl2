@@ -1,6 +1,6 @@
 import argparse
 from scripts.data_loader import load_data
-from scripts.stylish_detailed import stylish_tree
+from scripts.stylish import stylish
 from scripts.stylish_plain import stylish_plain
 from scripts.stylish_json import stylish_json
 
@@ -73,12 +73,11 @@ def make_raw_diff(source, changed_source):
 
 def get_format_func(format_type):
     if format_type == 'stylish':
-        func = stylish_tree
+        return stylish
     elif format_type == 'plain':
-        func = stylish_plain
+        return stylish_plain
     elif format_type == 'json':
-        func = stylish_json
-    return func
+        return stylish_json
 
 
 if __name__ == '__main__':
