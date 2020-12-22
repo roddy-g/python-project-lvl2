@@ -1,8 +1,8 @@
 import argparse
-from gendiff.data_loader import load_data
-from gendiff.stylish_detailed import stylish_tree
-from gendiff.stylish_plain import stylish_plain
-from gendiff.stylish_json import stylish_json
+from scripts.data_loader import load_data
+from scripts.stylish_detailed import stylish_tree
+from scripts.stylish_plain import stylish_plain
+from scripts.stylish_json import stylish_json
 
 
 def main():
