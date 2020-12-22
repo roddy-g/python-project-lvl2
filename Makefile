@@ -1,7 +1,7 @@
 install:
 	poetry install
 lint:
-	poetry run flake8 gendiff
+	poetry run flake8 gendiff.py scripts tests
 run:
 	poetry run gendiff tests/fixtures/simple_json_file_1.json tests/fixtures/simple_json_file_2.json
 test:
@@ -13,8 +13,8 @@ build:
 coverage:
 	poetry run pytest --cov=gendiff --cov-report xml
 CI:
-	poetry run pytest
-	poetry run flake8 gendiff
+	make test
+	make lint
 
 
 

@@ -1,8 +1,8 @@
 import argparse
-from gendiff.data_loader import load_data
-from gendiff.stylish_detailed import stylish_tree
-from gendiff.stylish_plain import stylish_plain
-from gendiff.stylish_json import stylish_json
+from scripts.data_loader import load_data
+from scripts.stylish import stylish
+from scripts.stylish_plain import stylish_plain
+from scripts.stylish_json import stylish_json
 
 
 def main():
@@ -12,23 +12,24 @@ def main():
     parser.add_argument('-f', '--format',
                         help='set format of output, valid formats are json,'
                              ' plain, tree. Default format is tree.',
-                        default=stylish_tree)
+                        default='stylish')
     args = parser.parse_args()
-    formatter = stylish_tree
-    if args.format == 'plain':
-        formatter = stylish_plain
-    if args.format == 'json':
-        formatter = stylish_json
-    first_file_data = load_data(args.path_to_first_file)
-    second_file_data = load_data(args.path_to_second_file)
-    diff = generate_diff(first_file_data, second_file_data, formatter)
+    formatter = args.format
+    diff = generate_diff(args.path_to_first_file,
+                         args.path_to_second_file,
+                         formatter)
     print(diff)
     return diff
 
 
-def generate_diff(source, changed_source, formatter):
+def generate_diff(path_to_first_file,
+                  path_to_second_file,
+                  formatter='stylish'):
+    source = load_data(path_to_first_file)
+    changed_source = load_data(path_to_second_file)
     if type(source) != dict and type(changed_source) != dict:
         return 'Incorrect input data'
+    formatter = get_format_func(formatter)
     raw_diff = make_raw_diff(source, changed_source)
     styled_dif = formatter(raw_diff)
     return styled_dif
@@ -68,6 +69,15 @@ def make_raw_diff(source, changed_source):
                 'value': changed_source[key]
             }
     return diff
+
+
+def get_format_func(format_type):
+    if format_type == 'stylish':
+        return stylish
+    elif format_type == 'plain':
+        return stylish_plain
+    elif format_type == 'json':
+        return stylish_json
 
 
 if __name__ == '__main__':
