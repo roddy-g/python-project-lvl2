@@ -20,14 +20,18 @@ def main():
         formatter = stylish_json
     else:
         formatter = stylish_tree
-    first_file_data = load_data(args.path_to_first_file)
-    second_file_data = load_data(args.path_to_second_file)
-    diff = generate_diff(first_file_data, second_file_data, formatter)
+    diff = generate_diff(args.path_to_first_file,
+                         args.path_to_second_file,
+                         formatter)
     print(diff)
     return diff
 
 
-def generate_diff(source, changed_source, formatter=stylish_tree):
+def generate_diff(path_to_first_file,
+                  path_to_second_file,
+                  formatter=stylish_tree):
+    source = load_data(path_to_first_file)
+    changed_source = load_data(path_to_second_file)
     if type(source) != dict and type(changed_source) != dict:
         return 'Incorrect input data'
     raw_diff = make_raw_diff(source, changed_source)
