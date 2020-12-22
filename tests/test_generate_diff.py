@@ -1,5 +1,4 @@
 from gendiff import generate_diff
-from scripts.stylish_plain import stylish_plain
 
 
 def test_simple_files():
@@ -41,7 +40,7 @@ def test_complicated_json_files():
 def test_complicated_files_plain_style():
     first_file_path = 'tests/fixtures/complicated_json_file_1.json'
     second_file_path = 'tests/fixtures/complicated_json_file_2.json'
-    diff = generate_diff(first_file_path, second_file_path, stylish_plain)
+    diff = generate_diff(first_file_path, second_file_path, 'plain')
     correct_diff_path = \
         'tests/fixtures/correct_plain_diff_for_complicated_files.txt'
     with open(correct_diff_path, 'r') as correct_diff:

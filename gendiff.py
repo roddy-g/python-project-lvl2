@@ -12,14 +12,9 @@ def main():
     parser.add_argument('-f', '--format',
                         help='set format of output, valid formats are json,'
                              ' plain, tree. Default format is tree.',
-                        default=stylish_tree)
+                        default=stylish)
     args = parser.parse_args()
-    if args.format == 'plain':
-        formatter = stylish_plain
-    elif args.format == 'json':
-        formatter = stylish_json
-    else:
-        formatter = stylish_tree
+    formatter = args.format
     diff = generate_diff(args.path_to_first_file,
                          args.path_to_second_file,
                          formatter)
@@ -29,11 +24,12 @@ def main():
 
 def generate_diff(path_to_first_file,
                   path_to_second_file,
-                  formatter=stylish_tree):
+                  formatter='stylish'):
     source = load_data(path_to_first_file)
     changed_source = load_data(path_to_second_file)
     if type(source) != dict and type(changed_source) != dict:
         return 'Incorrect input data'
+    formatter = get_format_func(formatter)
     raw_diff = make_raw_diff(source, changed_source)
     styled_dif = formatter(raw_diff)
     return styled_dif
@@ -73,6 +69,16 @@ def make_raw_diff(source, changed_source):
                 'value': changed_source[key]
             }
     return diff
+
+
+def get_format_func(format_type):
+    if format_type == 'stylish':
+        func = stylish_tree
+    elif format_type == 'plain':
+        func = stylish_plain
+    elif format_type == 'json':
+        func = stylish_json
+    return func
 
 
 if __name__ == '__main__':
