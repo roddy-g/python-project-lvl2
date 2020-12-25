@@ -6,6 +6,7 @@ authors = ["Roddy <per677199@yandex.ru>"]
 
 packages = [
 { include = 'gendiff.py'},
+{ include = 'scripts'}
 ]
 
 [tool.poetry.dependencies]
