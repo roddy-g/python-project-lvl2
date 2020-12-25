@@ -47,7 +47,7 @@ def test_simple_files(source, changed_source, correct_diff_path):
 
 @pytest.mark.parametrize('source,changed_source,correct_diff_path,style',
                          complicated_fixtures_list)
-def test_complicated_files(source, changed_source, correct_diff_path, style)
+def test_complicated_files(source, changed_source, correct_diff_path, style):
     if style:
         diff = generate_diff(source, changed_source, style)
     else:
