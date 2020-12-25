@@ -1,47 +1,53 @@
 from gendiff import generate_diff
+import pytest
 
 
-def test_simple_files():
-    first_file_path = 'tests/fixtures/simple_json_file_1.json'
-    second_file_path = 'tests/fixtures/simple_json_file_2.json'
-    diff = generate_diff(first_file_path, second_file_path)
-    correct_diff_path = 'tests/fixtures/correct_diff_for_simple_files.txt'
-    with open(correct_diff_path, 'r') as correct_diff:
+simple_fixtures_list = [
+    (
+        'tests/fixtures/simple/json_file_1.json',
+        'tests/fixtures/simple/json_file_2.json',
+        'tests/fixtures/simple/correct_diff_stylish.txt'
+    ),
+    (
+        'tests/fixtures/simple/yml_file_1.yml',
+        'tests/fixtures/simple/yml_file_2.yml',
+        'tests/fixtures/simple/correct_diff_stylish.txt'
+    )
+]
+complicated_fixtures_list = [
+    (
+        'tests/fixtures/complicated/yml_file_1.yml',
+        'tests/fixtures/complicated/yml_file_2.yml',
+        'tests/fixtures/complicated/correct_diff_stylish.txt',
+        'stylish'
+    ),
+    (
+        'tests/fixtures/complicated/json_file_1.json',
+        'tests/fixtures/complicated/json_file_2.json',
+        'tests/fixtures/complicated/correct_diff_stylish.txt',
+        'stylish'
+    ),
+    (
+        'tests/fixtures/complicated/json_file_1.json',
+        'tests/fixtures/complicated/json_file_2.json',
+        'tests/fixtures/complicated/correct_diff_plain.txt',
+        'plain'
+
+    )
+]
+
+
+@pytest.mark.parametrize('source,changed_source,correct_diff',
+                         simple_fixtures_list)
+def test_simple_files(source, changed_source, correct_diff):
+    diff = generate_diff(source, changed_source)
+    with open(correct_diff, 'r') as correct_diff:
         assert diff == correct_diff.read()
 
 
-def test_simple_yml_files():
-    first_file_path = 'tests/fixtures/simple_yml_file_1.yml'
-    second_file_path = 'tests/fixtures/simple_yml_file_2.yml'
-    diff = generate_diff(first_file_path, second_file_path)
-    correct_diff_path = 'tests/fixtures/correct_diff_for_simple_files.txt'
-    with open(correct_diff_path, 'r') as correct_diff:
-        assert diff == correct_diff.read()
-
-
-def test_complicated_yml_files():
-    first_file_path = 'tests/fixtures/complicated_yml_file_1.yml'
-    second_file_path = 'tests/fixtures/complicated_yml_file_2.yml'
-    diff = generate_diff(first_file_path, second_file_path)
-    correct_diff_path = 'tests/fixtures/correct_diff_for_complicated_files.txt'
-    with open(correct_diff_path, 'r') as correct_diff:
-        assert diff == correct_diff.read()
-
-
-def test_complicated_json_files():
-    first_file_path = 'tests/fixtures/complicated_json_file_1.json'
-    second_file_path = 'tests/fixtures/complicated_json_file_2.json'
-    diff = generate_diff(first_file_path, second_file_path)
-    correct_diff_path = 'tests/fixtures/correct_diff_for_complicated_files.txt'
-    with open(correct_diff_path, 'r') as correct_diff:
-        assert diff == correct_diff.read()
-
-
-def test_complicated_files_plain_style():
-    first_file_path = 'tests/fixtures/complicated_json_file_1.json'
-    second_file_path = 'tests/fixtures/complicated_json_file_2.json'
-    diff = generate_diff(first_file_path, second_file_path, 'plain')
-    correct_diff_path = \
-        'tests/fixtures/correct_plain_diff_for_complicated_files.txt'
-    with open(correct_diff_path, 'r') as correct_diff:
+@pytest.mark.parametrize('source,changed_source,correct_diff,style',
+                         complicated_fixtures_list)
+def test_complicated_files(source, changed_source, correct_diff, style):
+    diff = generate_diff(source, changed_source, style)
+    with open(correct_diff, 'r') as correct_diff:
         assert diff == correct_diff.read()
