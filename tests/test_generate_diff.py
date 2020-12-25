@@ -19,13 +19,13 @@ complicated_fixtures_list = [
         'tests/fixtures/complicated/yml_file_1.yml',
         'tests/fixtures/complicated/yml_file_2.yml',
         'tests/fixtures/complicated/correct_diff_stylish.txt',
-        'stylish'
+        ''
     ),
     (
         'tests/fixtures/complicated/json_file_1.json',
         'tests/fixtures/complicated/json_file_2.json',
         'tests/fixtures/complicated/correct_diff_stylish.txt',
-        'stylish'
+        ''
     ),
     (
         'tests/fixtures/complicated/json_file_1.json',
@@ -37,17 +37,20 @@ complicated_fixtures_list = [
 ]
 
 
-@pytest.mark.parametrize('source,changed_source,correct_diff',
+@pytest.mark.parametrize('source,changed_source,correct_diff_path',
                          simple_fixtures_list)
-def test_simple_files(source, changed_source, correct_diff):
+def test_simple_files(source, changed_source, correct_diff_path):
     diff = generate_diff(source, changed_source)
-    with open(correct_diff, 'r') as correct_diff:
+    with open(correct_diff_path, 'r') as correct_diff:
         assert diff == correct_diff.read()
 
 
-@pytest.mark.parametrize('source,changed_source,correct_diff,style',
+@pytest.mark.parametrize('source,changed_source,correct_diff_path,style',
                          complicated_fixtures_list)
-def test_complicated_files(source, changed_source, correct_diff, style):
-    diff = generate_diff(source, changed_source, style)
-    with open(correct_diff, 'r') as correct_diff:
+def test_complicated_files(source, changed_source, correct_diff_path, style):
+    if style:
+        diff = generate_diff(source, changed_source, style)
+    else:
+        diff = generate_diff(source, changed_source)
+    with open(correct_diff_path, 'r') as correct_diff:
         assert diff == correct_diff.read()
