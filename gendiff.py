@@ -1,8 +1,8 @@
 import argparse
 from scripts.data_loader import load_data
-from scripts.stylish import stylish
-from scripts.stylish_plain import stylish_plain
-from scripts.stylish_json import stylish_json
+from formatters.stylish import stylish
+from formatters.stylish_plain import stylish_plain
+from formatters.stylish_json import stylish_json
 
 
 def main():
