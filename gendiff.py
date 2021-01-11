@@ -19,7 +19,6 @@ def main():
                          args.path_to_second_file,
                          formatter)
     print(diff)
-    return diff
 
 
 def generate_diff(path_to_first_file,

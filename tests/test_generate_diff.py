@@ -4,33 +4,39 @@ import pytest
 
 fixtures_list = [
     (
-        'tests/fixtures/simple/json_file_1.json',
-        'tests/fixtures/simple/json_file_2.json',
-        'tests/fixtures/simple/correct_diff_stylish.txt',
+        'tests/fixtures/simple_json/before.json',
+        'tests/fixtures/simple_json/after.json',
+        'tests/fixtures/simple_json/correct_diff_stylish.txt',
         ''
     ),
     (
-        'tests/fixtures/simple/yml_file_1.yml',
-        'tests/fixtures/simple/yml_file_2.yml',
-        'tests/fixtures/simple/correct_diff_stylish.txt',
+        'tests/fixtures/simple_yml/before.yml',
+        'tests/fixtures/simple_yml/after.yml',
+        'tests/fixtures/simple_yml/correct_diff_stylish.txt',
         ''
     ),
     (
-        'tests/fixtures/complicated/yml_file_1.yml',
-        'tests/fixtures/complicated/yml_file_2.yml',
-        'tests/fixtures/complicated/correct_diff_stylish.txt',
+        'tests/fixtures/complicated_yml/before.yml',
+        'tests/fixtures/complicated_yml/after.yml',
+        'tests/fixtures/complicated_yml/correct_diff_stylish.txt',
+        ''
+    ),
+(
+        'tests/fixtures/complicated_yml/before.yml',
+        'tests/fixtures/complicated_yml/after.yml',
+        'tests/fixtures/complicated_yml/correct_diff_plain.txt',
+        'plain'
+    ),
+    (
+        'tests/fixtures/complicated_json/before.json',
+        'tests/fixtures/complicated_json/after.json',
+        'tests/fixtures/complicated_json/correct_diff_stylish.txt',
         ''
     ),
     (
-        'tests/fixtures/complicated/json_file_1.json',
-        'tests/fixtures/complicated/json_file_2.json',
-        'tests/fixtures/complicated/correct_diff_stylish.txt',
-        ''
-    ),
-    (
-        'tests/fixtures/complicated/json_file_1.json',
-        'tests/fixtures/complicated/json_file_2.json',
-        'tests/fixtures/complicated/correct_diff_plain.txt',
+        'tests/fixtures/complicated_json/before.json',
+        'tests/fixtures/complicated_json/after.json',
+        'tests/fixtures/complicated_json/correct_diff_plain.txt',
         'plain'
 
     )
