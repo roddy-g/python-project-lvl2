@@ -21,7 +21,7 @@ fixtures_list = [
         'tests/fixtures/complicated_yml/correct_diff_stylish.txt',
         ''
     ),
-(
+    (
         'tests/fixtures/complicated_yml/before.yml',
         'tests/fixtures/complicated_yml/after.yml',
         'tests/fixtures/complicated_yml/correct_diff_plain.txt',
