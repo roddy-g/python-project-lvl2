@@ -4,39 +4,39 @@ import pytest
 base_path = 'diff_generator/tests/fixtures/'
 fixtures_list = [
     (
-        base_path+'simple_json/before.json',
-        base_path+'simple_json/after.json',
-        base_path+'simple_json/correct_diff_stylish.txt',
+        base_path + 'simple_json/before.json',
+        base_path + 'simple_json/after.json',
+        base_path + 'simple_json/correct_diff_stylish.txt',
         ''
     ),
     (
-        base_path+'simple_yml/before.yml',
-        base_path+'simple_yml/after.yml',
-        base_path+'simple_yml/correct_diff_stylish.txt',
+        base_path + 'simple_yml/before.yml',
+        base_path + 'simple_yml/after.yml',
+        base_path + 'simple_yml/correct_diff_stylish.txt',
         ''
     ),
     (
-        base_path+'complicated_yml/before.yml',
-        base_path+'complicated_yml/after.yml',
-        base_path+'complicated_yml/correct_diff_stylish.txt',
+        base_path + 'complicated_yml/before.yml',
+        base_path + 'complicated_yml/after.yml',
+        base_path + 'complicated_yml/correct_diff_stylish.txt',
         ''
     ),
     (
-        base_path+'complicated_yml/before.yml',
-        base_path+'complicated_yml/after.yml',
-        base_path+'complicated_yml/correct_diff_plain.txt',
+        base_path + 'complicated_yml/before.yml',
+        base_path + 'complicated_yml/after.yml',
+        base_path + 'complicated_yml/correct_diff_plain.txt',
         'plain'
     ),
     (
-        base_path+'complicated_json/before.json',
-        base_path+'complicated_json/after.json',
-        base_path+'complicated_json/correct_diff_stylish.txt',
+        base_path + 'complicated_json/before.json',
+        base_path + 'complicated_json/after.json',
+        base_path + 'complicated_json/correct_diff_stylish.txt',
         ''
     ),
     (
-        base_path+'complicated_json/before.json',
-        base_path+'complicated_json/after.json',
-        base_path+'complicated_json/correct_diff_plain.txt',
+        base_path + 'complicated_json/before.json',
+        base_path + 'complicated_json/after.json',
+        base_path + 'complicated_json/correct_diff_plain.txt',
         'plain'
 
     )
