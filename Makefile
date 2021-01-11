@@ -11,7 +11,7 @@ package-install:
 build:
 	poetry build
 coverage:
-	poetry run pytest --cov=gendiff --cov-report xml
+	poetry run pytest --cov=diff_generator --cov-report xml
 CI:
 	make test
 	make lint
