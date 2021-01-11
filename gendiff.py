@@ -1,6 +1,7 @@
 import argparse
-from diff_generator.functions import make_raw_diff, load_data,\
+from diff_generator.functions import load_data,\
     FORMAT_TREE, FORMAT_PLAIN, FORMAT_JSON, get_format_func
+from diff_generator.generate_diff import make_raw_diff
 
 
 def main():
