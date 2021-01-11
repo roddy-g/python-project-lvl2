@@ -37,16 +37,16 @@ def stylish(raw_diff, level=0):
 def format_child_value(data, level):
     result = []
     indent = BASE_INDENT * level
-    if type(data) != dict:
+    if not isinstance(data, dict):
         return data
     for key in data:
-        if type(data[key]) != dict:
-            result.append('{}{}{}: {}'.format(
-                BASE_INDENT, indent, key, data[key]))
-        else:
+        if isinstance(data[key], dict):
             value = format_child_value(data[key], level=level + 1)
             result.append('{}{}{}: {}'.format(
                 BASE_INDENT, indent, key, value))
+        else:
+            result.append('{}{}{}: {}'.format(
+                BASE_INDENT, indent, key, data[key]))
     result = make_wrapped_string(result, indent)
     return result
 

@@ -32,9 +32,9 @@ def stylish_plain(raw_diff, parent=''):
 
 
 def format_value(value):
-    if type(value) == dict:
+    if isinstance(value, dict):
         return '[complex value]'
-    if type(value) == str:
+    elif isinstance(value, str):
         return "'{}'".format(value)
     return value
 
