@@ -38,7 +38,7 @@ def generate_diff(path_to_first_file,
 
 def make_raw_diff(source, changed_source):
     diff = {}
-    all_keys = set(list(source.keys())+list(changed_source.keys()))
+    all_keys = set(list(source.keys()) + list(changed_source.keys()))
     for key in all_keys:
         if key not in changed_source:
             status = 'deleted'
