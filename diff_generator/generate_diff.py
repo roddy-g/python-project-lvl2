@@ -1,3 +1,18 @@
+from diff_generator.functions import FORMAT_TREE, load_data, get_format_func
+
+
+def generate_diff(path_to_first_file,
+                  path_to_second_file,
+                  formatter_name=FORMAT_TREE):
+    source = load_data(path_to_first_file)
+    changed_source = load_data(path_to_second_file)
+    if isinstance(source, dict) and isinstance(changed_source, dict):
+        formatter = get_format_func(formatter_name)
+        raw_diff = make_raw_diff(source, changed_source)
+        styled_dif = formatter(raw_diff)
+        return styled_dif
+
+
 def make_raw_diff(source, changed_source):
     diff = {}
     all_keys = set(list(source.keys()) + list(changed_source.keys()))

@@ -1,4 +1,4 @@
-from gendiff import generate_diff
+from diff_generator.generate_diff import generate_diff
 import pytest
 
 base_path = 'diff_generator/tests/fixtures/'
