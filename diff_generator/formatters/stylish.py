@@ -10,23 +10,24 @@ def stylish(raw_diff, level=0):
     styled_diff = []
     for key in sorted(raw_diff.keys()):
         data = raw_diff[key]
-        if data['status'] == 'deleted':
-            special_indent = INDENT_DELETED
-        elif data['status'] == 'added':
-            special_indent = INDENT_ADDED
-        elif data['status'] == 'common':
-            special_indent = INDENT_COMMON
+        special_indent = get_indent_type(data['status'])
         if data['key_type'] in ['unique', 'unchanged']:
-            value = format_child_value(data['value'], level=level + 1)
-            styled_diff.append(TEMPLATE.format(indent, special_indent, key, value))
+            value = format_value(data['value'], level=level + 1)
+            styled_diff.append(TEMPLATE.format(indent,
+                                               special_indent, key, value))
         elif data['key_type'] == 'node':
             value = stylish(data['value'], level=level + 1)
-            styled_diff.append(TEMPLATE.format(indent, special_indent, key, value))
+            styled_diff.append(TEMPLATE.format(indent,
+                                               special_indent, key, value))
         elif data['key_type'] == 'changed':
-            value_before = format_child_value(data['value']['before'], level=level + 1)
-            styled_diff.append(TEMPLATE.format(indent, INDENT_DELETED, key, value_before))
-            value_after = format_child_value(data['value']['after'], level=level + 1)
-            styled_diff.append(TEMPLATE.format(indent, INDENT_ADDED, key, value_after))
+            value_before = format_value(
+                data['value']['before'], level=level + 1)
+            styled_diff.append(TEMPLATE.format(
+                indent, INDENT_DELETED, key, value_before))
+            value_after = format_value(
+                data['value']['after'], level=level + 1)
+            styled_diff.append(TEMPLATE.format(
+                indent, INDENT_ADDED, key, value_after))
     styled_diff = make_wrapped_string(styled_diff, indent)
     styled_diff = styled_diff.replace('True', 'true')
     styled_diff = styled_diff.replace('False', 'false')
@@ -34,18 +35,27 @@ def stylish(raw_diff, level=0):
     return styled_diff
 
 
-def format_child_value(data, level):
+def get_indent_type(status):
+    if status == 'deleted':
+        return INDENT_DELETED
+    elif status == 'added':
+        return INDENT_ADDED
+    elif status == 'common':
+        return INDENT_COMMON
+
+
+def format_value(data, level):
     result = []
     indent = BASE_INDENT * level
     if not isinstance(data, dict):
         return data
     for key in data:
         if isinstance(data[key], dict):
-            value = format_child_value(data[key], level=level + 1)
-            result.append('{}{}{}: {}'.format(
+            value = format_value(data[key], level=level + 1)
+            result.append(TEMPLATE.format(
                 BASE_INDENT, indent, key, value))
         else:
-            result.append('{}{}{}: {}'.format(
+            result.append(TEMPLATE.format(
                 BASE_INDENT, indent, key, data[key]))
     result = make_wrapped_string(result, indent)
     return result

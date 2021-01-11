@@ -1,6 +1,6 @@
-TEMPLATE_REMOVED = "Property '{}' was removed"
-TEMPLATE_UPDATED = "Property '{}' was updated. From {} to {}"
-TEMPLATE_ADDED = "Property '{}' was added with value: {}"
+REMOVED = "Property '{}' was removed"
+UPDATED = "Property '{}' was updated. From {} to {}"
+ADDED = "Property '{}' was added with value: {}"
 
 
 def stylish_plain(raw_diff, parent=''):
@@ -10,19 +10,20 @@ def stylish_plain(raw_diff, parent=''):
         formatted_parent = format_parent(parent, key)
         if data['status'] == 'added':
             formatted_value = format_value(data['value'])
-            styled_diff.append(TEMPLATE_ADDED.format(
+            styled_diff.append(ADDED.format(
                 formatted_parent, formatted_value))
         elif data['status'] == 'deleted':
-            styled_diff.append(TEMPLATE_REMOVED.format(formatted_parent, key))
+            styled_diff.append(REMOVED.format(formatted_parent, key))
         elif data['status'] == 'common':
             if data['key_type'] == 'changed':
                 formatted_value_before = format_value(data['value']['before'])
                 formatted_value_after = format_value(data['value']['after'])
-                styled_diff.append(TEMPLATE_UPDATED.format(formatted_parent,
-                                                           formatted_value_before,
-                                                           formatted_value_after))
+                styled_diff.append(UPDATED.format(formatted_parent,
+                                                  formatted_value_before,
+                                                  formatted_value_after))
             elif data['key_type'] == 'node':
-                child_diff = stylish_plain(data['value'], parent=formatted_parent)
+                child_diff = stylish_plain(data['value'],
+                                           parent=formatted_parent)
                 styled_diff.append(child_diff)
     styled_diff = '\n'.join(styled_diff)
     styled_diff = styled_diff.replace('True', 'true')
