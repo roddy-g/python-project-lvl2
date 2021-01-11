@@ -36,37 +36,35 @@ def generate_diff(path_to_first_file,
 
 def make_raw_diff(source, changed_source):
     diff = {}
-    for key in source:
+    all_keys = set(list(source.keys())+list(changed_source.keys()))
+    for key in all_keys:
         if key not in changed_source:
-            diff[key] = {
-                'status': 'deleted',
-                'value': source[key],
-            }
-        elif type(source[key]) == dict and type(changed_source[key]) == dict:
-            child_diff = make_raw_diff(source[key], changed_source[key])
-            diff[key] = {
-                'status': 'common',
-                'value': child_diff
-            }
-        elif source[key] != changed_source[key]:
-            diff[key] = {
-                'status': 'changed',
-                'value': {
+            status = 'deleted'
+            key_type = 'unique'
+            value = source[key]
+        elif key not in source:
+            status = 'added'
+            key_type = 'unique'
+            value = changed_source[key]
+        else:
+            status = 'common'
+            if type(source[key]) == dict and type(changed_source[key]) == dict:
+                key_type = 'node'
+                value = make_raw_diff(source[key], changed_source[key])
+            elif source[key] != changed_source[key]:
+                key_type = 'changed'
+                value = {
                     'before': source[key],
                     'after': changed_source[key]
                 }
-            }
-        else:
-            diff[key] = {
-                'status': 'common',
-                'value': source[key]
-            }
-    for key in changed_source:
-        if key not in source:
-            diff[key] = {
-                'status': 'added',
-                'value': changed_source[key]
-            }
+            else:
+                key_type = 'unchanged'
+                value = source[key]
+        diff[key] = {
+            'status': status,
+            'key_type': key_type,
+            'value': value
+        }
     return diff
 
 
