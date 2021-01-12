@@ -8,13 +8,10 @@ def format_built_in_constants(raw_diff):
 
 def transform_built_in(value):
     if value is True:
-        print(value)
         return 'true'
     elif value is False:
-        print(value)
         return 'false'
     elif value is None:
-        print(value)
         return 'null'
     else:
         return value
