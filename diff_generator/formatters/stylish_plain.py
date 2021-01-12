@@ -1,5 +1,5 @@
 from diff_generator.constants import TEMPLATE_REMOVED, TEMPLATE_UPDATED,\
-    TEMPLATE_ADDED, COMMON, ADDED, DELETED, NODE, CHANGED
+    TEMPLATE_ADDED, ADDED, DELETED, NODE, CHANGED
 from diff_generator.formatters.format_built_in_consts\
     import format_built_in_constants
 
