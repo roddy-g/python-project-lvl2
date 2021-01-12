@@ -1,4 +1,6 @@
-from diff_generator.functions import FORMAT_TREE, load_data, get_format_func
+from diff_generator.functions import load_data, get_format_func
+from diff_generator.constants import COMMON, ADDED, DELETED, UNIQUE, NODE, \
+    CHANGED, UNCHANGED, FORMAT_TREE
 
 
 def generate_diff(path_to_first_file,
@@ -18,31 +20,37 @@ def make_raw_diff(source, changed_source):
     all_keys = set(list(source.keys()) + list(changed_source.keys()))
     for key in all_keys:
         if key not in changed_source:
-            status = 'deleted'
-            key_type = 'unique'
+            status = DELETED
+            key_type = UNIQUE
             value = source[key]
         elif key not in source:
-            status = 'added'
-            key_type = 'unique'
+            status = ADDED
+            key_type = UNIQUE
             value = changed_source[key]
         else:
-            status = 'common'
-            if isinstance(source[key], dict)\
-                    and isinstance(changed_source[key], dict):
-                key_type = 'node'
-                value = make_raw_diff(source[key], changed_source[key])
-            elif source[key] != changed_source[key]:
-                key_type = 'changed'
-                value = {
-                    'before': source[key],
-                    'after': changed_source[key]
-                }
-            else:
-                key_type = 'unchanged'
-                value = source[key]
+            status = COMMON
+            key_type, value = compare_common_keys_values(
+                source[key], changed_source[key])
         diff[key] = {
             'status': status,
             'key_type': key_type,
             'value': value
         }
     return diff
+
+
+def compare_common_keys_values(value_1, value_2):
+    if isinstance(value_1, dict) \
+            and isinstance(value_2, dict):
+        key_type = NODE
+        value = make_raw_diff(value_1, value_2)
+    elif value_1 != value_2:
+        key_type = CHANGED
+        value = {
+            'before': value_1,
+            'after': value_2
+        }
+    else:
+        key_type = UNCHANGED
+        value = value_2
+    return key_type, value
