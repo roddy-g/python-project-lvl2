@@ -50,11 +50,9 @@ def format_value(data, level):
     for key in data:
         if isinstance(data[key], dict):
             value = format_value(data[key], level=level + 1)
-            result.append(BASE_TEMPLATE.format(
-                BASE_INDENT, indent, key, value))
         else:
-            result.append(BASE_TEMPLATE.format(
-                BASE_INDENT, indent, key, data[key]))
+            value = data[key]
+        result.append(BASE_TEMPLATE.format(BASE_INDENT, indent, key, value))
     result = make_wrapped_string(result, indent)
     return result
 

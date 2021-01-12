@@ -18,8 +18,8 @@ def stylish_plain(raw_diff, parent=''):
         elif data['key_type'] == CHANGED:
             value_before = format_value(data['value']['before'])
             value_after = format_value(data['value']['after'])
-            styled_diff.append(TEMPLATE_UPDATED.format(
-                    key_parent, value_before, value_after))
+            styled_diff.append(
+                TEMPLATE_UPDATED.format(key_parent, value_before, value_after))
         elif data['key_type'] == NODE:
             child_diff = stylish_plain(data['value'], parent=key_parent)
             styled_diff.append(child_diff)
