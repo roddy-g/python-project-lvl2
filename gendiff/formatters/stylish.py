@@ -1,4 +1,4 @@
-from gendiff.diff_generator.constants import\
+from gendiff.constants import\
     COMMON, ADDED, DELETED, UNIQUE, NODE, CHANGED, UNCHANGED, BASE_INDENT,\
     INDENT_DELETED, INDENT_ADDED, INDENT_COMMON, BASE_TEMPLATE
 from gendiff.formatters.format_built_in_consts\

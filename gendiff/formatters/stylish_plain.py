@@ -1,4 +1,4 @@
-from gendiff.diff_generator.constants import TEMPLATE_REMOVED,\
+from gendiff.constants import TEMPLATE_REMOVED,\
     TEMPLATE_UPDATED, TEMPLATE_ADDED, ADDED, DELETED, NODE, CHANGED
 from gendiff.formatters.format_built_in_consts\
     import format_built_in_constants

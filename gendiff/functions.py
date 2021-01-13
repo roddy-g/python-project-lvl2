@@ -1,6 +1,6 @@
 from json import load as json_load
 from yaml import safe_load as yaml_load
-from gendiff.diff_generator.constants import FORMAT_TREE,\
+from gendiff.constants import FORMAT_TREE,\
     FORMAT_PLAIN, FORMAT_JSON
 from gendiff.formatters.stylish import stylish
 from gendiff.formatters.stylish_json import stylish_json
