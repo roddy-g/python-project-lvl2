@@ -11,8 +11,8 @@ def generate_diff(path_to_first_file,
     if isinstance(source, dict) and isinstance(changed_source, dict):
         formatter = get_format_func(formatter_name)
         raw_diff = make_raw_diff(source, changed_source)
-        styled_dif = formatter(raw_diff)
-        return styled_dif
+        styled_diff = formatter(raw_diff)
+        return styled_diff
 
 
 def make_raw_diff(source, changed_source):

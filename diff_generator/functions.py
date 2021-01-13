@@ -15,6 +15,8 @@ def load_data(path_to_file):
         elif filetype in ['yml', 'yaml']:
             data = yaml_load(data)
             return data
+        else:
+            raise ValueError('Неверный тип данных')
 
 
 def get_format_func(format_type):
@@ -25,4 +27,4 @@ def get_format_func(format_type):
     elif format_type == FORMAT_JSON:
         return stylish_json
     else:
-        raise AttributeError('Неверно указан тип форматтера')
+        raise ValueError('Неверно указан тип форматтера')

@@ -1,9 +1,7 @@
 install:
 	poetry install
 lint:
-	poetry run flake8 gendiff.py diff_generator
-run:
-	poetry run gendiff tests/fixtures/simple_json_file_1.json tests/fixtures/simple_json_file_2.json
+	poetry run flake8 diff_generator
 test:
 	poetry run pytest	
 package-install:
