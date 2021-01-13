@@ -7,11 +7,12 @@ from diff_generator.formatters.stylish_plain import stylish_plain
 
 
 def load_data(path_to_file):
+    filetype = path_to_file.split('.')[-1].lower()
     with open(path_to_file) as data:
-        if path_to_file[-5:] == '.json':
+        if filetype == 'json':
             data = json_load(data)
             return data
-        if path_to_file[-4:] == '.yml' or path_to_file[-5:] == '.yaml':
+        elif filetype in ['yml', 'yaml']:
             data = yaml_load(data)
             return data
 
