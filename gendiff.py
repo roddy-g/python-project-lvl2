@@ -19,9 +19,5 @@ def main():
     print(diff)
 
 
-def generate_diff():
-    pass
-
-
 if __name__ == '__main__':
     main()
