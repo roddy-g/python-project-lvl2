@@ -1,7 +1,7 @@
 install:
 	poetry install
 lint:
-	poetry run flake8 gendiff
+	poetry run flake8 diff_generator
 test:
 	poetry run pytest	
 package-install:

@@ -5,7 +5,7 @@ description = ""
 authors = ['Roddy <per677199@yandex.ru>']
 
 packages = [
-{ include = 'gendiff'},
+{ include = 'diff_generator'},
 { include = 'gendiff.py'}
 ]
 

@@ -1,5 +1,5 @@
-from gendiff.functions import load_data, get_format_func
-from gendiff.constants import COMMON, ADDED, DELETED, UNIQUE, NODE, \
+from diff_generator.functions import load_data, get_format_func
+from diff_generator.constants import COMMON, ADDED, DELETED, UNIQUE, NODE, \
     CHANGED, UNCHANGED, FORMAT_TREE
 
 
