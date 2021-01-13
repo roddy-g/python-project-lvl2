@@ -1,6 +1,6 @@
-from diff_generator.functions import load_data, get_format_func
-from diff_generator.constants import COMMON, ADDED, DELETED, UNIQUE, NODE, \
-    CHANGED, UNCHANGED, FORMAT_TREE
+from gendiff.diff_generator.functions import load_data, get_format_func
+from gendiff.diff_generator.constants import COMMON, ADDED, DELETED,\
+    UNIQUE, NODE, CHANGED, UNCHANGED, FORMAT_TREE
 
 
 def generate_diff(path_to_first_file,

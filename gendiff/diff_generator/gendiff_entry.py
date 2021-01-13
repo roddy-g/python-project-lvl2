@@ -1,6 +1,7 @@
 import argparse
-from diff_generator.constants import FORMAT_TREE, FORMAT_PLAIN, FORMAT_JSON
-from diff_generator.generate_diff import generate_diff
+from gendiff.diff_generator.constants import FORMAT_TREE,\
+    FORMAT_PLAIN, FORMAT_JSON
+from gendiff.diff_generator.generate_diff import generate_diff
 
 
 def main():

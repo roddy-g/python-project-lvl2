@@ -1,7 +1,7 @@
 install:
 	poetry install
 lint:
-	poetry run flake8 diff_generator
+	poetry run flake8 gendiff
 test:
 	poetry run pytest	
 package-install:
@@ -9,7 +9,7 @@ package-install:
 build:
 	poetry build
 coverage:
-	poetry run pytest --cov=diff_generator --cov-report xml
+	poetry run pytest --cov=gendiff --cov-report xml
 CI:
 	make test
 	make lint
